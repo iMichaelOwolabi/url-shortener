@@ -2,10 +2,10 @@
   "name": "url-shortener",
   "version": "1.0.0",
   "description": "A URL shortener built with node.js and redis",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "node src/index.js",
     "dev": "nodemon start"
   },
   "repository": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/iMichaelOwolabi/url-shortener#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "bluebird": "^3.7.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mustache": "^4.1.0",
