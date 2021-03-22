@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { client } = require('../dbConfig');
-const { config } = require('../utils');
 
 router.get('/:shortUrlId', async (req, res) => {
   const { shortUrlId } = req.params
@@ -18,11 +17,7 @@ router.get('/:shortUrlId', async (req, res) => {
   client.hincrby(`url:${originalUrl}`, 'clickCount', 1);
 
   // Return the original URL
-  return res.status(200).send({
-    success: true,
-    message: `The original URL`,
-    data: originalUrl,
-  })
+  return res.redirect(originalUrl);
 });
 
 module.exports = router;

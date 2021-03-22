@@ -11,15 +11,15 @@ router.post('', async (req, res) => {
   if (!validUrl.isUri(originalUrl)) {
     return res.status(400).send({
       success: false,
-      message: `${originalUrl} is not a valid URL`
+      message: `Enter a valid URL to shorten`
     })
   }
   
   try {
     const keyExist = await client.hexistsAsync(`url:${originalUrl}`, 'id'); // Check if the URL already exist
     if (!keyExist) {
-      const urlId = nanoid();
-      const shortenedUrl = `${config.baseUrl}/${urlId}`;
+      const urlId = nanoid(8);
+      const shortenedUrl = `${config.baseUrl}/r/${urlId}`;
 
       await client.hsetAsync(`url:${originalUrl}`, 'id', urlId,  'originalUrl', originalUrl, 'shortUrl', shortenedUrl, 'clickCount', 0); // save the URL record
 
@@ -27,7 +27,7 @@ router.post('', async (req, res) => {
        * Save the new URL ID as a string and assign the original URL as the value
        * This is used as the second index for lookup
       */
-      await client.setAsync(urlId, originalUrl)
+      const yes = await client.setAsync(urlId, originalUrl)
 
       // Retrun the shortened URL
       return res.status(201).send({
@@ -46,6 +46,7 @@ router.post('', async (req, res) => {
       data: shortenedUrl,
     }) 
   } catch (error) {
+    console.error(error)
       return res.status(500).send({
         success: false,
         message: 'Sorry, something went wrong. Plz try again'
