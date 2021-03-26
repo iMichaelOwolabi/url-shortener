@@ -24,6 +24,7 @@ body {
   background-color:	#0080ff;
   color: #fff;
   font-size: 18px;
+  cursor: pointer;
 }
 
 .url-shortener-text {
