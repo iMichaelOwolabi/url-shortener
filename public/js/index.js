@@ -3,6 +3,7 @@ const loadingSign = document.querySelector('.loading');
 const urlTextbox = document.querySelector('input');
 const error = document.querySelector('.error');
 const shortenedUrl = document.querySelector('.shortened-url');
+const shortenedLink = document.querySelector('.shortened-link');
 
 urlShortenerForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -22,12 +23,13 @@ urlShortenerForm.addEventListener('submit', (e) => {
     response.json().then((response) => {
       if (!response.success) {
         loadingSign.textContent = '';
-        shortenedUrl.textContent = '';
+        shortenedLink.textContent = '';
         error.textContent = response.message;
       } else {
         loadingSign.textContent = '';
         error.textContent = '';
-        shortenedUrl.textContent = response.data.shortUrl;
+        shortenedLink.href = response.data.shortUrl;
+        shortenedLink.innerHTML = response.data.shortUrl;
       }
     })
   });
