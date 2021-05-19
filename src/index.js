@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const path = require('path');
 const expressHandlebars = require('express-handlebars');
 const { config } = require('./utils');
@@ -8,7 +7,7 @@ const redirectRouter = require('./routes/redirectUrl');
 const homeRouter = require('./routes/index');
 
 const port = config.serverPort || 7000;
-const publicDircetoryPath = path.join(__dirname, '../public');
+const publicDirectoryPath = path.join(__dirname, '../public');
 
 const router = express;
 
@@ -20,7 +19,7 @@ app.engine('handlebars', expressHandlebars());
 app.set('view engine', 'handlebars');
 
 // Setup static directory to serve
-app.use(express.static(publicDircetoryPath));
+app.use(express.static(publicDirectoryPath));
 
 app.listen(port, () => {
   console.log(`server listening on port ${port} 🚀`);
